@@ -11,10 +11,14 @@ let vm = new Vue({
             namaBunga: null
         }
     },
+
+    created: function() {
+        this.getPembeli()
+    },
     
-   methods:{
+    methods:{
         savePembeli: function(){
-            let data = {
+            let _data = {
                 nomor: this.nomor,
                 namaBunga: this.namaBunga,
 
@@ -22,11 +26,10 @@ let vm = new Vue({
             }
 
             axios
-            .post('https://projek-uas-iota.vercel.app/listPembeli/', data)
-            .then(res =>{
-                this.dataPembeli = res
-                
-                this.getPembeli()
+            .post('https://projek-uas-iota.vercel.app/listPembeli', _data)
+            .then(response =>{
+                $('#exampleModal').modal('hide');
+                this.getPembeli();
             })
             .catch(err =>{
                 console.log(err);
@@ -35,34 +38,26 @@ let vm = new Vue({
 
         getPembeli: function() {
             axios
-                .get('https://projek-uas-iota.vercel.app/listPembeli')
-                .then((response) =>{
+            .get('https://projek-uas-iota.vercel.app/listPembeli')
+            .then(response =>{
                 console.log(response.data);
                 this.dataPembeli = response.data
-
                 
-                }).catch(err =>{
-                console.log(err);
-                this.error = true
-                })
-            .finally(() => (this.loading = false))
-        },
-
-
-
-        deletePembeli: function(id){
-            axios
-            .delete('https://projek-uas-iota.vercel.app/listPembeli/' + id)
-            .then(res =>{
-                console.log(res);
             })
             .catch(err =>{
-                err
+                console.log(err);
+                })
+        },
+
+        deletePembeli(_id) {
+            axios
+            .delete('https://projek-uas-iota.vercel.app/listPembeli/' + _id)
+            .then(response => {
+                this.getPembeli();
+            })
+            .catch(error => {
+                console.log(error);
             })
         }
-    },
-
-    mounted(){
-        this.getPembeli()
     }
 })

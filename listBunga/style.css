@@ -10,12 +10,6 @@
     transition: .2s linear;
 }
 
-.container{
-    background:linear-gradient(45deg, rgb(255,183,197) , rgb(231,254,255));
-    padding:15px 9%;
-    padding-bottom: 100px;
-}
-
 .container .heading{
     text-align: center;
     padding-bottom: 15px;
@@ -77,4 +71,11 @@
     .container{
         padding:20px;
     }
+}
+
+.bg-index {
+    background-image: url('bground.png');
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-size: 100% 100%;
 }

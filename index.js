@@ -48,9 +48,9 @@ let vm = new Vue({
 
 
 
-        deleteBunga: function(id){
+        deleteBunga: function(_id){
             axios
-            .delete('https://projek-uas-iota.vercel.app/listBunga/' + id)
+            .delete('https://projek-uas-iota.vercel.app/listBunga/' + _id)
             .then(res =>{
                 console.log(res);
             })
